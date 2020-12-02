@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "aofemboli": {
+      "hosting": {
+        "Web-Project": [
+          "aofemboli"
+        ]
+      }
+    }
+  }
+}
