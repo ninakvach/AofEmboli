@@ -7,7 +7,10 @@
         </div>
     </div>
     <!-- end of preloader -->
-
+    <script async defer src="https://apis.google.com/js/api.js"></script>
+    <script src="https://apis.google.com/js/platform.js" ></script>
+    <script type="text/javascript" src="https://apis.google.com/js/api:client.js?onLoad=onGoogleScriptLoaded"></script>
+    <meta name="google-signin-client_id" content="1033332787724-ikk7j23be4cnna60hktctcuj8jb4060p.apps.googleusercontent.com.apps.googleusercontent.com">
     <script>$("#js-rotating").Morphext({
         // The [in] animation type. Refer to Animate.css for a list of available animations.
         animation: "fadeIn",
@@ -19,6 +22,17 @@
             // Called after the entrance animation is executed.
         }
     });</script>
+    <script src="https://apis.google.com/js/platform.js?onload=onLoadCallback" async defer></script>
+    <script>
+    window.onLoadCallback = function(){
+      gapi.auth2.init({
+          client_id: '1033332787724-ikk7j23be4cnna60hktctcuj8jb4060p.apps.googleusercontent.com'
+        });
+    }
+    window.onGoogleScriptLoad = () => {
+  console.log('The google script has really loaded, cool!');
+}
+    </script>
     <!-- Navbar -->
     <nav class="navbar navbar-expand-md navbar-dark navbar-custom fixed-top">
         <!-- Text Logo - Use this if you don't have a graphic logo -->
@@ -33,9 +47,53 @@
             <span class="navbar-toggler-awesome fas fa-times"></span>
         </button>
         <!-- end of mobile menu toggle button -->
-
+        <li class="nav-item">
+           <h6><a class="nav-link page-scroll"  *ngIf="authService.user | async"> User: {{ (authService.user | async)?.email }}</a></h6>
+            
+        </li>
+       
         <div class="collapse navbar-collapse" id="navbarsExampleDefault">
             <ul class="navbar-nav ml-auto">
+                <div *ngIf="!(authService.user | async)">
+                    <li class="nav-item">
+                        <a class="nav-link page-scroll" style="font: 12px;padding-top: 0rem;" (click)="reset()"  >Reset<br>Passw</a>
+                         
+                     </li>
+                    </div>
+                            <li class="nav-item">
+                    <!-- this div displays only when user is not-logged-in -->
+                      <div *ngIf="!(authService.user | async)">
+                            <!-- these input fields takes email and password from user -->
+                            <input type="text" [(ngModel)]="email" placeholder="Enter email"/>
+                            <input type="password" [(ngModel)]="password" placeholder="Enter password"/>
+                           
+                            <!-- user click this button to login -->
+                         
+                      </div>
+                    
+                        <!-- user click this button to logout -->
+                        <!-- this button displays only when user is logged-in -->
+                 
+                </li>
+               
+                <li class="nav-item" >
+                    <div *ngIf="!(authService.user | async)">
+                    <!-- user click this button to signup -->
+                    <button class="btn-solid-lg page-scroll" style="padding: 0.575rem 0.325rem 0.575rem 0.325rem;"(click)="login()" [disabled]="!email || !password">
+                        Login
+                      </button>
+                </div>
+                
+            </li>
+                <li class="nav-item">
+                    <div *ngIf="!(authService.user | async)">
+                    <!-- user click this button to signup -->
+                    <button class="btn-solid-lg page-scroll" style="padding: 0.575rem 0.325rem 0.575rem 0.325rem;"(click)="signup()" [disabled]="!email || !password">
+                      Signup
+                    </button>
+                </div>
+               
+                    </li>
                 <li class="nav-item">
                     <a class="nav-link page-scroll" href="#header">HOME <span class="sr-only">(current)</span></a>
                 </li>
@@ -59,6 +117,17 @@
                 <li class="nav-item">
                     <a class="nav-link page-scroll" href="#contact">CONTACT</a>
                 </li>
+
+                <li class="nav-item">
+                    <button class="btn-solid-lg page-scroll" style="padding: 0.575rem 0.325rem 0.575rem 0.325rem;" (click)="logout()" *ngIf="authService.user | async">
+                        Logout
+                      </button>  </li>
+                
+                  
+
+              
+              
+             
             </ul>
             
         </div>

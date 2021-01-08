@@ -4,7 +4,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="section-title">PROJECTS</div>
-                <h2>Directional Complex Wavelet and complex FFT<br> For Quadrature data</h2>
+                <h2>( Login And Verify To Download Projects ) <br> Directional Complex Wavelet and complex FFT<br> For Quadrature data</h2>
             </div> <!-- end of col -->
         </div> <!-- end of row -->
         <div class="row">
@@ -64,9 +64,12 @@
                             </li>
                         </ul>
                     </div>
+                   
+                    <div  *ngIf="this.authService.readLocalStorageValue('verify')==='true'"  > 
                     <div class="button-container">
                         <a class="btn-solid-reg page-scroll" href="assets/kod/Project-grey.m" download="kod/Project-grey.m">DOWNLOAD</a>
                     </div> <!-- end of button-container -->
+                </div>
                 </div>
                 <!-- end of card -->
 
@@ -124,9 +127,11 @@
                             </li>
                         </ul>
                     </div>
+                    <div *ngIf="this.authService.readLocalStorageValue('verify')==='true'" >
                     <div class="button-container">
                         <a class="btn-solid-reg page-scroll" href="assets/kod/Project-colored.m" download="kod/Project-colored.m">DOWNLOAD</a>
                     </div> <!-- end of button-container -->
+                </div>
                 </div>
                 <!-- end of card -->
 
@@ -154,10 +159,12 @@
                             </li>
                         </ul>
                     </div>
+                    <div *ngIf="this.authService.readLocalStorageValue('verify')==='true'" >
                     <div class="button-container">
-                        <a class="btn-solid-reg page-scroll" href="https://drive.google.com/file/d/1-Jq7kg3Q0Xb14w-MqX1Ac8uHnRO4qX1a/view?usp=sharing" download="data.zip">DOWNLOAD</a>      
+                        <a class="btn-solid-reg page-scroll" href="https://firebasestorage.googleapis.com/v0/b/aofemboli.appspot.com/o/Data.zip?alt=media&token=33af2aa1-aeba-46a1-83dd-65099bc11c1c" download="data.zip">DOWNLOAD</a>      
               
                     </div>
+                </div>
                 <!-- end of card -->
 
             </div> <!-- end of col -->

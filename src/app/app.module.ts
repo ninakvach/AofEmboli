@@ -16,6 +16,14 @@ import { TeamsComponent } from './components/teams/teams.component';
 import { AboutComponent } from './components/about/about.component';
 import { ContactComponent } from './components/contact/contact.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFireMessagingModule } from '@angular/fire/messaging';
+import {AngularFireStorageModule, BUCKET } from '@angular/fire/storage';
+import { environment } from '../environments/environment';
+import { FormsModule } from '@angular/forms';
+import { AuthService } from './service/auth.service';
 enableProdMode();
 @NgModule({
   declarations: [
@@ -36,9 +44,15 @@ enableProdMode();
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireAuthModule,
+    AngularFireMessagingModule,
+    AngularFireStorageModule,
   ],
-  providers: [],
+  providers: [AngularFirestore,
+    { provide: BUCKET, useValue: 'my-bucket-name'}, AuthService],
   
   bootstrap: [AppComponent]
 })
